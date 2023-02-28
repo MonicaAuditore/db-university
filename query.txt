@@ -7,6 +7,10 @@ SELECT * FROM `courses` WHERE `cfu` > 10;
 3. Selezionare tutti gli studenti che hanno più di 30 anni
 SELECT *, DATEDIFF(CURDATE(), `date_of_birth`) AS eta FROM `students` WHERE DATEDIFF(CURDATE(), `date_of_birth`) > 30;
 
+//calcolo l'età degli studenti sottraendo la data di nascita dello studente dalla data di oggi;
+CURDATE() mi restituisce la data di oggi --> DATEDIFF() fa la differenza tra la data di oggi e la data di nascita dello studente;
+uso poi 'AS eta' per dare un nome al risultato.
+
 4. Selezionare tutti i corsi del primo semestre del primo anno di un qualsiasi corso di laurea (286)
 
 
