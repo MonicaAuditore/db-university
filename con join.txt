@@ -10,7 +10,8 @@ SELECT *
 FROM `degrees` 
 INNER JOIN `departments` 
 ON `departments`.`id` = `degrees`.`department_id` 
-WHERE `degrees`.`level` = 'magistrale';
+WHERE `degrees`.`level` = 'magistrale'
+AND `departments`.name = 'Dipartimento di Neuroscienze';
 
 3. Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44) (11)
 SELECT * 
@@ -22,7 +23,8 @@ relativo dipartimento, in ordine alfabetico per cognome e nome
 SELECT `courses.id`, `courses.name`, `courses.description`, `courses.period`, `courses.year`, `courses.cfu`, `courses.website` 
 FROM `courses` 
 INNER JOIN `students`
-ON `students`.`id` = `courses`.`id`;
+ON `students`.`id` = `courses`.`id`
+GROUP BY `courses.id`, `courses.name`, `courses.description`, `courses.period`, `courses.year`, `courses.cfu`, `courses.website`
 
 5. Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti (0) 
 SELECT *
@@ -43,7 +45,9 @@ INNER JOIN `courses`
 ON `course_teacher`.`course_id` = `courses`.`id`
 INNER JOIN `degrees`
 ON `courses`.`degree_id` = `degrees`.`id`
-WHERE `degrees`.`name` = 'Dipartimento di Matematica'
+INNER JOIN `departments`
+ON `degrees`.`department_id` = `departments`.`id`
+WHERE `departments`.`name` = 'Dipartimento di Matematica'
 ORDER BY `teachers`.`id`;
 
 
