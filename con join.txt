@@ -61,4 +61,13 @@ ORDER BY `teachers`.`id`;
 
 
 7. BONUS: Selezionare per ogni studente quanti tentativi d’esame ha sostenuto per 
-superare ciascuno dei suoi esami
+superare ciascuno dei suoi esami (21880)
+SELECT students.id, students.name, students.surname, students.registration_number, students.enrolment_date, COUNT(exam_student.exam_id) AS num_tentativi, MAX(exam_student.vote) AS voto_massimo, exams.course_id 
+FROM `students`
+INNER JOIN exam_student
+ON students.id = exam_student.student_id
+INNER JOIN exams
+ON exam_student.exam_id = exams.id
+GROUP BY exams.course_id, students.id, students.name, students.surname, students.registration_number, students.enrolment_date
+HAVING voto_massimo >= 18
+ORDER BY students.surname, students.name;
